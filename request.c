@@ -69,6 +69,11 @@ void requestReadHdrs(rio_t *rp) {
 	 * The previous line will only read one line, however, it should
 	 * discard everything up to an empty text line.
 	 */
+	/*By using a while loop it will read more than one line until MAXLINE reachs its maximum*/
+
+	 while (strcmp(buf, "\r\n")) {
+         Rio_readlineb(rp, buf, MAXLINE);
+         }
 
 	return;
 }
@@ -256,14 +261,12 @@ In the POSIX locale, strcasecmp() and strncasecmp() shall behave as if the strin
 	} else {
 		/* TODO: Implement the dynamic case */
 
-	 if (!(S_ISREG(sbuf.st_mode)) || !(S_IXUSR & sbuf.st_mode)) {
-         requestError(fd, filename, "403", "Forbidden", "1DT032 Server could not run this file");
+	 if (!(S_ISREG(sbuf.st_mode)) || !(S_IXUSR & sbuf.st_mode)) { /*System call for S_IXUSR*/
+         requestError(fd, filename, "403", "Forbidden", "1DT032 Server could not read this file");
          return;
       }
- 	  worker->dynamics++;
 
-     	  requestServeDynamic(fd, filename, cgiargs, arrival, dispatch, worker);
-		
+     	  requestServeDynamic(fd, filename, cgiargs, arrival, dispatch);
 	}
 }
 

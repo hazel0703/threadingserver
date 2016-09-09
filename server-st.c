@@ -31,6 +31,15 @@ void getargs(int argc, char *argv[], int *port)
 {
 	/* TODO: Verify that the arguments are valid */
 
+	 if (argc != 2) {
+		if(argc != 1 || strcmp(argv[2], "The arguments that you are writing are not valid")) {
+			fprintf(stderr, "%s <port number> \n", argv[0]);
+			exit(1);
+			}
+        }
+        *port = atoi(argv[1]);
+
+
 }
 
 int requestcmp(const void *first, const void *second) {
@@ -71,18 +80,30 @@ int main(int argc, char *argv[]) {
 		clientlen = sizeof(clientaddr);
 
 		/* TODO: Accept a connection and retrieve connfd */
+	        connfd = Accept(listenfd, &clientaddr, &clientlen);
+		gettimeofday(&arrival, NULL);
 
 		/* TODO: Allocate a request structure */
+		request *req = malloc(sizeof(request)); 
+
 
 		/* TODO: Save the time for the statistics */
+		
 
 		/* TODO: Set the request file descriptor to the one accepted */
 
+		req->fd = connfd; /*After accepting the connection and retrieving connfd??*/
+
 		/* TODO: Set the arrival and dispatch time */
-		
+		req->dispatch = (calculate_time(dispatch.tv_sec)); /*Not sure if this is working*/
+	 	
+
 		/* TODO: Call the request handler */
+		//void requestHandle(int fd, long arrival, long dispatch) This is the function to be called
+		requestHandle(req->fd, req->arrival, req->dispatch);
 
 		/* TODO: Close */
+		Close(req->fd);
 	
 	}
 
