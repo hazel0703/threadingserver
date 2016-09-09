@@ -246,9 +246,7 @@ void requestHandle(int fd, long arrival, long dispatch) {
 		requestServeStatic(fd, filename, sbuf.st_size, arrival, dispatch);
 	} else {
 		/* TODO: Implement the dynamic case */
-
-		/* Delegate the request processing to the Request module */
-		requestServeDynamic(fd, filename, cgiargs, arrival, dispatch);
+		
 	}
 }
 
