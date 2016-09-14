@@ -92,7 +92,7 @@ int main(int argc, char *argv[]) {
 
 		/* TODO: Save the time for the statistics */
 
-		/*Don't know what to do here :( */
+		req->calculate = time(arrival%clientlen);
 		
 
 		/* TODO: Set the request file descriptor to the one accepted */

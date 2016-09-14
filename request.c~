@@ -227,11 +227,7 @@ void requestHandle(int fd, long arrival, long dispatch) {
 
 	/* TODO: Return an error if a GET method is received. */
 
-	if (strcasecmp(method, "GET")) { /*The strcasecmp() function shall compare, while ignoring differences in case, the string pointed to by s1 to the string pointed to by s2. The strncasecmp() function shall compare, while ignoring differences in case, not more than n bytes from the string pointed to by s1 to the string pointed to by s2.
-
-In the POSIX locale, strcasecmp() and strncasecmp() shall behave as if the strings had been converted to lowercase and then a byte comparison performed. The results are unspecified in other locales.
-
-*/
+	if (strcasecmp(method, "GET")) { 
         requestError(fd, method, "Error 501", "The server has not GET method programmed", "Method unavailable at 1DT032 Server");
         return;
         }
